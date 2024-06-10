@@ -1,11 +1,17 @@
 <template>
-  <nav class="text-black bg-white/95 shadow-black shadow-sm">
-    <div
-      class="flex item-center justify-between w-full container inside-container py-2"
-    >
+  <nav
+    class="text-white/95 bg-[#000814] shadow-black shadow-sm"
+    :class="{
+      'border-b-2 border border-white/5': !signingUp,
+    }"
+  >
+    <div class="flex item-center justify-between w-full py-3 px-10">
       <div class="flex gap-x-16 items-center">
-        <div class="text-2xl font-bold">secQr</div>
-        <ul class="flex gap-x-8 relative">
+        <div class="text-3xl font-bold">[...]</div>
+        <!-- <ul
+          class="gap-x-8 relative hidden md:flex"
+          v-if="!signingUp"
+        >
           <li
             v-for="(item, index) in topLevelNavItems"
             :key="`${item.id}`"
@@ -30,20 +36,34 @@
               </svg>
             </div>
           </li>
-        </ul>
+        </ul> -->
       </div>
       <div class="flex gap-x-4">
-        <UButton
-          v-if="userAuthed"
-          label="Log Out"
-          class="!text-black !px-3 !py-2"
-          @click="signOutUser()"
+        <div v-if="userAuthed" class="flex gap-x-2">
+          <UButton
+            label="Delete Account"
+            class="!text-white !px-3 !py-2"
+            @click="signOutUser()"
+            variant="outline"
+          />
+          <UButton
+            label="Log Out"
+            class="!text-white !px-3 !py-2"
+            @click="signOutUser()"
+            variant="outline"
+          />
+        </div>
+        <UButton 
+          v-else-if="useRouter().currentRoute.value.path === '/login'"
+          label="Sign Up"
+          class="text-white"
+          to="/sign-up"
           variant="outline"
         />
         <UButton
-          v-else
+          v-else-if="!signingUp"
           label="Log In"
-          class="!text-black"
+          class="text-white"
           to="/login"
           variant="outline"
         />
@@ -87,6 +107,10 @@ const handleMouseLeave = () => {
   isMouseOver.value = false;
   if (!isMouseOver.value && active.value) active.value = false;
 };
+
+const signingUp = computed(() => {
+  return useRoute().path === '/sign-up';
+});
 
 onMounted(() => {
   console.log(userAuthed.value);

@@ -5,6 +5,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  deleteUser as firebaseDeleteUser,
 } from 'firebase/auth';
 import { defineStore } from 'pinia';
 import type { User, Auth } from 'firebase/auth';
@@ -59,7 +60,7 @@ export const useUserStore = defineStore('userStore', () => {
             updatedAt: new Date(),
           };
 
-          // hit the prisma backend to add the user to the supabase database
+          // hit the backend to add the user to the supabase database
           await useFetch('/api/database/user/create', {
             method: 'POST',
             body: userDetails,
@@ -128,8 +129,12 @@ export const useUserStore = defineStore('userStore', () => {
       await signOut(auth);
       // reset the user
       await resetUser();
+
       console.log('user signed out');
       console.log(userAuthState.value);
+
+      // redirect to 'login'
+      useRouter().push('/login');
 
       // show toast
       useToast().add({
@@ -149,6 +154,26 @@ export const useUserStore = defineStore('userStore', () => {
       }
     }
   };
+
+  const deleteUser = async () => {
+    const auth = getAuth();
+    if(!auth.currentUser) return;
+
+    try {
+      await firebaseDeleteUser(auth.currentUser);
+      await resetUser();
+
+      // redirect back to /login
+      useRouter().push('/login');
+    } catch (e) {
+      if (e instanceof Error) {
+        throw createError({
+          statusCode: 500,
+          message: e.message,
+        });
+      }
+    }
+  }
 
   const resetUser = async () => {
     const auth = getAuth();

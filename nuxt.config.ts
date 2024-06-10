@@ -26,10 +26,6 @@ export default defineNuxtConfig({
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Solway',
-        },
-        {
-          rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Quicksand',
         },
         {
@@ -43,6 +39,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  devServer: {
+    port: 4000,
+  },
   css: ['~/assets/css/main.css'],
   modules: [
     '@nuxt/ui',
@@ -50,6 +49,7 @@ export default defineNuxtConfig({
     '@nuxtjs/prismic',
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
+    'nuxt-marquee',
   ],
 
   postcss: {

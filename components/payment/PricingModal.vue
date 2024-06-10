@@ -92,8 +92,6 @@ onMounted(async () => {
     currentUserEmail.value = currentUser?.value?.email;
   }
 
-  console.log(currentUserEmail.value);
-
   // if we still do not have the email, throw an error
   if (!currentUserEmail.value || !props.paymentPlan)
     throw createError({
@@ -123,6 +121,8 @@ onMounted(async () => {
     }
 
     const { invoice, paymentPrice } = stripeResponse?.data?.value;
+
+    console.log(invoice);
 
     if (invoice.kind === 'none')
       return router.push({

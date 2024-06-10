@@ -4,7 +4,7 @@
       class="flex items-center justify-between w-full container inside-container"
     >
       <div class="flex gap-x-16 items-center">
-        <div class="text-2xl font-bold">secQr</div>
+        <div class="text-2xl font-bold">[...]</div>
         <ul class="flex gap-x-8 relative">
           <li
             v-for="(item, index) in navComponents"
