@@ -18,7 +18,7 @@
             v-model="email"
             icon="i-heroicons-envelope"
             padding="md"
-            placeholder="hello@secqr.com"
+            placeholder="hello@[...].com"
             type="text"
             :valid="!validEmail"
             :errorMessage="validEmail ? 'Invalid email' : ''"

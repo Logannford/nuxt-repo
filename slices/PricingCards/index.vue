@@ -33,7 +33,7 @@
       </div> -->
       <div
         v-if="!loading"
-        class="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-5 w-3/4 xl:w-[55%] items-end h-max"
+        class="grid grid-cols-1 lg:grid-cols-3 gap-x-3 gap-y-5 w-3/4 xl:w-[55%] items-end"
       >
         <div
           v-for="(product, index) in productList"

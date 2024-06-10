@@ -39,6 +39,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  devServer: {
+    port: 4000,
+  },
   css: ['~/assets/css/main.css'],
   modules: [
     '@nuxt/ui',

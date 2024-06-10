@@ -7,9 +7,9 @@
   >
     <div class="flex item-center justify-between w-full py-3 px-10">
       <div class="flex gap-x-16 items-center">
-        <div class="text-3xl font-bold">secQr</div>
-        <ul
-          class="flex gap-x-8 relative"
+        <div class="text-3xl font-bold">[...]</div>
+        <!-- <ul
+          class="gap-x-8 relative hidden md:flex"
           v-if="!signingUp"
         >
           <li
@@ -36,20 +36,34 @@
               </svg>
             </div>
           </li>
-        </ul>
+        </ul> -->
       </div>
       <div class="flex gap-x-4">
-        <UButton
-          v-if="userAuthed"
-          label="Log Out"
-          class="!text-black !px-3 !py-2"
-          @click="signOutUser()"
+        <div v-if="userAuthed" class="flex gap-x-2">
+          <UButton
+            label="Delete Account"
+            class="!text-white !px-3 !py-2"
+            @click="signOutUser()"
+            variant="outline"
+          />
+          <UButton
+            label="Log Out"
+            class="!text-white !px-3 !py-2"
+            @click="signOutUser()"
+            variant="outline"
+          />
+        </div>
+        <UButton 
+          v-else-if="useRouter().currentRoute.value.path === '/login'"
+          label="Sign Up"
+          class="text-white"
+          to="/sign-up"
           variant="outline"
         />
         <UButton
           v-else-if="!signingUp"
           label="Log In"
-          class="!text-black"
+          class="text-white"
           to="/login"
           variant="outline"
         />

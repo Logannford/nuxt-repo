@@ -4,7 +4,7 @@
       <div class="bg-white col-span-8 border-r border-light-grey">
         <div class="flex flex-col gap-y-10 p-10">
           <div class="w-full flex justify-center">
-            <h1 class="text-4xl">secQr</h1>
+            <h1 class="text-4xl">[...]</h1>
           </div>
           <!-- put these into an object, v-for it to prevent this mess -->
           <div class="border border-gray-300 rounded px-3 text-black">
@@ -190,6 +190,8 @@ onMounted(async () => {
     }
 
     const { invoice, paymentPrice } = stripeResponse?.data?.value;
+
+    console.log(invoice, paymentPrice);
 
     paymentIntentClientSecret.value = invoice;
     paymentDetails.Price = paymentPrice / 100;
